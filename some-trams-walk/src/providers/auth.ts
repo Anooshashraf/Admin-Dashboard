@@ -1,6 +1,6 @@
 import type { AuthProvider } from "@refinedev/core";
 
-// import type { User } from "@/graphql/schema.types";
+import type { User } from "@/graphql/schema.types";
 
 import { API_URL, dataProvider } from "./data";
 
@@ -15,12 +15,15 @@ export const authCredentials = {
 export const authProvider: AuthProvider = {
   login: async ({ email }) => {
     try {
+      // call the login mutation where the dataProvider.custom is used to make a custom request to the GraphQl API
+      // this will call the data provider which will go through a fetchWrapper function
       const { data } = await dataProvider.custom({
         url: API_URL,
         method: "post",
         headers: {},
         meta: {
           variables: { email },
+          //Getting the Access token of user
           rawQuery: `
                 mutation Login($email: String!) {
                     login(loginInput: {
@@ -33,11 +36,11 @@ export const authProvider: AuthProvider = {
         },
       });
 
-      localStorage.setItem("access_token", data.login.accessToken);
+      localStorage.setItem("access_token", data.login.accessToken); //Storing the user's Access token to the local storage
 
       return {
         success: true,
-        redirectTo: "/",
+        redirectTo: "/", // after successfully ending the login functionality redirect to home page
       };
     } catch (e) {
       const error = e as Error;
@@ -51,6 +54,8 @@ export const authProvider: AuthProvider = {
       };
     }
   },
+
+  //It simply remove the access token from the local storage and logout the page
   logout: async () => {
     localStorage.removeItem("access_token");
 
@@ -60,6 +65,7 @@ export const authProvider: AuthProvider = {
     };
   },
   onError: async (error) => {
+    //to check whether the error is authentication error and if so it sets the logout function to true
     if (error.statusCode === "UNAUTHENTICATED") {
       return {
         logout: true,
@@ -70,11 +76,15 @@ export const authProvider: AuthProvider = {
   },
   check: async () => {
     try {
+      // to get the identity of the user
+      // this is to check whether the user trying to login is authenticated or not
+
       await dataProvider.custom({
-        url: API_URL,
-        method: "post",
+        url: API_URL, //Points to GraphQL endpoint
+        method: "post", // data provider sends a POST request to API_URL
         headers: {},
         meta: {
+          // actual graphQl query being sent here
           rawQuery: `
                     query Me {
                         me {
@@ -84,7 +94,7 @@ export const authProvider: AuthProvider = {
                 `,
         },
       });
-
+      //Server processes the query and returns the requested name field for the authenticated user
       return {
         authenticated: true,
         redirectTo: "/",
