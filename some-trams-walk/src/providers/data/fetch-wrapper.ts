@@ -1,4 +1,11 @@
 import { GraphQLFormattedError } from "graphql";
+
+type Error = {
+    message : string;
+    statusCode : string;
+}
+
+
 const customFetch = async (url: string , options: RequestInit) => {
     const accessToken = localStorage.getItem('access_token');
     const headers = options.headers as Record<string,string>;
@@ -19,7 +26,7 @@ const getGraphQLErrors = (body: Record<"errors", GraphQLFormattedError[] | undef
 Error | null => {
     if(!body){
         return{
-            message: "Unknown Error!"
+            message: "Unknown Error!",
             statusCode: "INTERNAL_SERVER_ERROR"
         }
     }
@@ -30,5 +37,23 @@ Error | null => {
         )?.join("");
         const code = errors?.[0]?.extensions?.code;
 
+        return {
+            message: messages || JSON.stringify(errors),
+            statusCode: code || 500
+        }
     }
+}
+
+export const fetchWrapper = async (url: string , options: RequestInit) => {
+
+    const response = await customFetch(url , options);
+    const responseClone = response.clone();
+    const body = responseClone.json();
+    const error = getGraphQLErrors(body);
+
+    if(error) {
+        throw error;
+    }
+
+    return response;
 }

@@ -5,10 +5,8 @@ import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import { useNotificationProvider } from "@refinedev/antd";
 import "@refinedev/antd/dist/reset.css";
 
-import dataProvider, {
-  GraphQLClient,
-  liveProvider,
-} from "@refinedev/nestjs-query";
+import { dataProvider, liveProvider } from "./providers";
+
 import routerBindings, {
   DocumentTitleHandler,
   UnsavedChangesNotifier,
@@ -24,9 +22,9 @@ function App() {
       <RefineKbarProvider>
         <AntdApp>
           <DevtoolsProvider>
-            <Refine
-              // dataProvider={dataProvider(gqlClient)}
-              // liveProvider={liveProvider(wsClient)}
+            <Refine // this refine component is the entry point of our refine application
+              dataProvider={dataProvider}
+              liveProvider={liveProvider}
               notificationProvider={useNotificationProvider}
               routerProvider={routerBindings}
               options={{
