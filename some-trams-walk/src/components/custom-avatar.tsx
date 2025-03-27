@@ -13,7 +13,9 @@ const CustomAvatar = ({ name, style, ...rest }: Props) => {
         display: "flex",
         alignItems: "center",
         border: "non",
+        ...style,
       }}
+      {...rest}
     >
       {name}
     </AntdAvatar>
