@@ -1,7 +1,7 @@
 import { Avatar as AntdAvatar, AvatarProps } from "antd";
 
 type Props = AvatarProps & {
-  name: string;
+  name?: string;
 };
 
 const CustomAvatar = ({ name, style, ...rest }: Props) => {
