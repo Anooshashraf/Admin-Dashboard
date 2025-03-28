@@ -21,5 +21,5 @@ const CustomAvatar = ({ name, style, ...rest }: Props) => {
     </AntdAvatar>
   );
 };
-
+ 
 export default CustomAvatar;
