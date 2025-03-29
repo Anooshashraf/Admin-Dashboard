@@ -21,7 +21,7 @@ const Header = () => {
 
   return (
     <Layout.Header style={headerStyles}>
-      <Space>
+      <Space align="center" size="middle">
         <div>
           <CurrentUser />
         </div>
