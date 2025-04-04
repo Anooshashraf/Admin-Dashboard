@@ -9,8 +9,8 @@ import { DASHBOARD_CALENDAR_UPCOMING_EVENTS_QUERY } from "@/graphql/queries";
 import dayjs from "dayjs";
 
 const UpcomingEvents = () => {
-  
-  const {data, isLoading}= useList({
+  //const [isLoading , setIsLoading] = useState(true)
+  const {data , isLoading } = useList({
     resource: 'events',
     pagination:{pageSize:5},
     sorters: [
@@ -19,7 +19,7 @@ const UpcomingEvents = () => {
         order: 'asc'
       }
     ],
-    filters:[
+     filters:[  
       {
         field: 'startDate',
         operator: 'gte',
@@ -33,28 +33,17 @@ const UpcomingEvents = () => {
   // alert(JSON.stringify(data))
   return (
     <Card 
-      style={{
-        height:"100%"
-      }}
-      headStyle = {{
-        padding: '8px 16px'
-      }}
-      bodyStyle = {{
-        padding: '0 1rem'
-      }}
+      style={{ height:"100%" }}
+      headStyle = {{ padding: '8px 16px' }}
+      bodyStyle = {{ padding: '0 1rem' }}
       title = {
         <div style={{
           display:'flex',
           alignItems: 'center',
-          gap: '8px'
+          gap: '8px',
         }}>
           <CalendarOutlined/>
-          <Text 
-            size="sm"
-            style={{
-              marginLeft : "0.5rem"
-            }}
-          >
+          <Text size="sm" style={{  marginLeft : "0.5rem" }}>
             Upcoming Events
           </Text>
 
@@ -64,7 +53,7 @@ const UpcomingEvents = () => {
       {isLoading ? (
         <List
         itemLayout="horizontal"
-        dataSource={Array.from({length:5}).map((_ , index) => ({
+        dataSource={Array.from({length:5}).map((_, index) => ({
           id: index,
         }))}
         renderItem={() => <UpcomingEventsSkeleton/>}
@@ -78,12 +67,12 @@ const UpcomingEvents = () => {
             return(
               <List.Item>
                 <List.Item.Meta
-                avatar={<Badge color={item.color}/>}
-                title={<Text size="xs">{renderDate}</Text>}
-                description={<Text ellipsis={{tooltip:true}}
-                strong>
-                  {item.title}
-                </Text>}
+                  avatar={<Badge color={item.color}/>}
+                  title={<Text size="xs">{renderDate}</Text>}
+                  description={<Text ellipsis={{tooltip:true}}
+                  strong>
+                    {item.title}
+                  </Text>}
 
                 />
               </List.Item>
@@ -91,19 +80,19 @@ const UpcomingEvents = () => {
           }}
         />
       )}
-        {!isLoading && data?.data.length === 0 && (
-            <span
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "220px"
-              }}
-            >
-              No Upcoming Events
-            </span>
-          )
-        }
+      {!isLoading && data?.data.length === 0 && (
+          <span
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "220px"
+            }}
+          >
+            No Upcoming Events
+          </span>
+        )
+      }
     </Card>
 
   )
