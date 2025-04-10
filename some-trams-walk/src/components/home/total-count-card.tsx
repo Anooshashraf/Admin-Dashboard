@@ -2,7 +2,7 @@ import { totalCountVariants } from '@/constants'
 import { Card, Skeleton, Tooltip } from 'antd'
 import React from 'react'
 import { Text } from '../text'
-import { T } from 'react-router/dist/development/fog-of-war-CGNKxM4z'
+// import { T } from 'react-router/dist/development/fog-of-war-CGNKxM4z'
 import { Area } from '@ant-design/plots'
 
 
@@ -52,7 +52,7 @@ const DashboardTotalCountCard = ({
         },
         areaStyle: () =>{
             return {
-                fill: `l(270) 0:#fff 0.2${secondaryColor} 1${primaryColor}`
+                fill: `l(270) 0:#fff 0.2${secondaryColor} 1:${primaryColor}`
             }
         }
 
