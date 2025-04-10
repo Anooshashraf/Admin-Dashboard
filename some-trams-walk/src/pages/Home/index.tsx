@@ -1,8 +1,9 @@
-import { UpcomingEvents , DealsChart, DashboardTotalCountCard} from "@/components";
+import { UpcomingEvents , DealsChart, DashboardTotalCountCard, LatestActivities } from "@/components";
 import { DASHBOARD_TOTAL_COUNTS_QUERY } from "@/graphql/queries";
 import { DashboardTotalCountsQuery } from "@/graphql/types";
 import { useCustom } from "@refinedev/core";
 import { Row , Col } from "antd";
+
 
 export const Home = () => {
   const {data,isLoading} = useCustom<DashboardTotalCountsQuery>({
@@ -40,9 +41,6 @@ export const Home = () => {
         </Col>
       </Row>
 
-
-
-
       <Row
         gutter={[32,32]}
         style={{
@@ -68,6 +66,16 @@ export const Home = () => {
           }}
         >
           <DealsChart/>
+        </Col>
+      </Row>
+      <Row
+        gutter={[32,32]}
+        style={{
+          marginTop: '32px'
+        }}
+      >
+        <Col xs={24}>
+          <LatestActivities/>
         </Col>
       </Row>
     </div>

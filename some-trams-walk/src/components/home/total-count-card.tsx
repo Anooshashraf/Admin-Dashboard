@@ -4,12 +4,12 @@ import React from 'react'
 import { Text } from '../text'
 // import { T } from 'react-router/dist/development/fog-of-war-CGNKxM4z'
 import { Area } from '@ant-design/plots'
-
+import { AreaConfig } from '@ant-design/plots'
 
 type Props = {
     resource: "companies" | "contacts" | "deals",
     isLoading: Boolean,
-    totalCount: number 
+    totalCount?: number 
 }
 const DashboardTotalCountCard = ({
     resource,
