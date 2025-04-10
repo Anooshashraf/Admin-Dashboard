@@ -1,5 +1,5 @@
 import { totalCountVariants } from '@/constants'
-import { Card, Skeleton } from 'antd'
+import { Card, Skeleton, Tooltip } from 'antd'
 import React from 'react'
 import { Text } from '../text'
 import { T } from 'react-router/dist/development/fog-of-war-CGNKxM4z'
@@ -9,7 +9,7 @@ import { Area } from '@ant-design/plots'
 type Props = {
     resource: "companies" | "contacts" | "deals",
     isLoading: Boolean,
-    totalCount: number
+    totalCount: number 
 }
 const DashboardTotalCountCard = ({
     resource,
@@ -21,6 +21,41 @@ const DashboardTotalCountCard = ({
         data: totalCountVariants[resource].data,
         xField: 'index',
         yField: 'value',
+        appendPadding: [1,0,0,0],
+        padding: 0,
+        syncViewPadding: true,
+        autoFit: true,
+        tooltip: false,
+        animation: false,
+        xAxis: false,
+        yAxis:{
+            tickCount: 12,
+            label:{
+                style:{
+                    stroke: "transparent"
+
+                }
+            
+            },
+            grid:{
+                line:{
+                    style:{
+                        stroke: "transparent"
+                    }
+                }
+            }
+
+        },
+        smooth: true,
+        line:{
+            color: primaryColor,
+        },
+        areaStyle: () =>{
+            return {
+                fill: `l(270) 0:#fff 0.2${secondaryColor} 1${primaryColor}`
+            }
+        }
+
     }
     return (
         <Card
