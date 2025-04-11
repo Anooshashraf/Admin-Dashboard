@@ -2,6 +2,7 @@ import { UnorderedListOutlined } from "@ant-design/icons";
 import { Card, List } from "antd";
 import { Text } from "../text";
 import LatestActivitiesSkeleton from "../skeleton/latest-activities";
+import { Dayjs } from "dayjs";
 import { useList } from "@refinedev/core";
 import { DASHBOARD_LATEST_ACTIVITIES_AUDITS_QUERY, DASHBOARD_LATEST_ACTIVITIES_DEALS_QUERY } from "@/graphql/queries";
 
@@ -36,7 +37,13 @@ const LatestActivities = () => {
 
 
     })
-    const isLoading = false;
+
+    if(isError){
+        console.log(error)
+        return null;
+    }
+
+    const isLoading = isLoadingAudit || isLoadingDeals;
     return(
         <Card
         headStyle={{
@@ -77,7 +84,17 @@ const LatestActivities = () => {
             ):(
                 <List
                     itemLayout="horizontal"
-                    dataSource={}
+                    dataSource={audit?.data}
+                    renderItem={(item) => {
+                        const deal = deals?.data.find((deal) => deal.id === item.targetId) || undefined;
+                        return(
+                            <List.Item>
+                                <List.Item.Meta
+                                    title = {dayjs(deal?.createdAt).format('MMM DD - YYYY - HH:mm')} 
+                                />
+                            </List.Item>
+                        )
+                    }}
                 />
             )
             }
