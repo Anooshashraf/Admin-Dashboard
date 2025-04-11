@@ -2,7 +2,7 @@ import { UnorderedListOutlined } from "@ant-design/icons";
 import { Card, List } from "antd";
 import { Text } from "../text";
 import LatestActivitiesSkeleton from "../skeleton/latest-activities";
-import { Dayjs } from "dayjs";
+import  dayjs  from "dayjs";
 import { useList } from "@refinedev/core";
 import { DASHBOARD_LATEST_ACTIVITIES_AUDITS_QUERY, DASHBOARD_LATEST_ACTIVITIES_DEALS_QUERY } from "@/graphql/queries";
 
