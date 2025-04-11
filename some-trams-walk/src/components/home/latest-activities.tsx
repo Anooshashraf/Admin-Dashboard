@@ -1,10 +1,11 @@
 import { UnorderedListOutlined } from "@ant-design/icons";
-import { Card, List } from "antd";
+import { Card, List, Space } from "antd";
 import { Text } from "../text";
 import LatestActivitiesSkeleton from "../skeleton/latest-activities";
 import  dayjs  from "dayjs";
 import { useList } from "@refinedev/core";
 import { DASHBOARD_LATEST_ACTIVITIES_AUDITS_QUERY, DASHBOARD_LATEST_ACTIVITIES_DEALS_QUERY } from "@/graphql/queries";
+import CustomAvatar from "../custom-avatar";
 
 const LatestActivities = () => {
     const {data:audit, isLoading: isLoadingAudit, isError ,error } = useList({
@@ -86,11 +87,25 @@ const LatestActivities = () => {
                     itemLayout="horizontal"
                     dataSource={audit?.data}
                     renderItem={(item) => {
-                        const deal = deals?.data.find((deal) => deal.id === item.targetId) || undefined;
+                        const deal = deals?.data.find((deal) => deal.id == String( item.targetId)) || undefined;
                         return(
                             <List.Item>
                                 <List.Item.Meta
                                     title = {dayjs(deal?.createdAt).format('MMM DD - YYYY - HH:mm')} 
+                                    avatar= {
+                                        <CustomAvatar
+                                            shape="square"
+                                            size={48}
+                                            src={deal?.company.avatarUrl}
+                                            name={deal?.company.name}
+                                        />
+                                    }
+                                    description={
+                                        <Space size={4}>
+                                            <Text strong>{item.user?.name}</Text>
+                                            <Text strong>{item.action === 'CREATE' ? 'created': 'moved'}</Text>
+                                        </Space>
+                                    }
                                 />
                             </List.Item>
                         )
