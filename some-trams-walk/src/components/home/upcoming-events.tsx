@@ -12,13 +12,14 @@ const UpcomingEvents = () => {
   const {data , isLoading } = useList({
     resource: 'events',
     pagination:{pageSize:5},
-    sorters: [ 
+    sorters: [
       {
         field: 'startDate',
         order: 'asc'
       }
     ],
-     filters:[  
+   
+    filters:[  
       {
         field: 'startDate',
         operator: 'gte',
