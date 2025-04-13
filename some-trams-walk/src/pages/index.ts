@@ -2,4 +2,4 @@ export * from "./Home";
 export * from "./forgotPassword";
 export * from "./login";
 export * from "./register";
-export * from "./CompanyList";
+export * from "./Company/list";
