@@ -1,7 +1,9 @@
 import { COMPANIES_LIST_QUERY } from "@/graphql/queries";
-import { CreateButton, List , useTable } from "@refinedev/antd"
-import { useGo } from "@refinedev/core";
-import { Table } from "antd";
+import { CreateButton, FilterDropdown, List , useTable } from "@refinedev/antd"
+import { getDefaultFilter, useGo } from "@refinedev/core";
+import { Table,Input , Space} from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+
 export const CompanyList = () => {
     const go = useGo();
     const {tableProps, filters} = useTable({
@@ -39,7 +41,21 @@ export const CompanyList = () => {
                     ...tableProps.pagination,
                 }}
             >
-
+                <Table.Column
+                    dataIndex= "name"
+                    title="Company title"
+                    defaultFilteredValue={getDefaultFilter('id',filters)}
+                    filterIcon = {<SearchOutlined/>}
+                    filterDropdown={(props) => (
+                        <FilterDropdown{...props}>
+                            <Input placeholder="Search Company"/>                        
+                        </FilterDropdown>
+                    )}
+                    render ={(value ,record)=> (
+                        <Space>
+                        </Space>
+                    )}
+                />
             </Table>
         </List>
     )
