@@ -5,7 +5,11 @@ import { Table } from "antd";
 export const CompanyList = () => {
     const go = useGo();
     const {tableProps, filters} = useTable({
+        
         resource: 'companies',
+        pagination:{
+            pageSize: 12
+        },
         meta: {
             gqlQuery: COMPANIES_LIST_QUERY 
         }
@@ -30,7 +34,11 @@ export const CompanyList = () => {
                 />
             )}
         >
-            <Table>
+            <Table {...tableProps}
+                pagination={{
+                    ...tableProps.pagination,
+                }}
+            >
 
             </Table>
         </List>
