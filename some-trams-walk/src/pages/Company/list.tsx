@@ -1,8 +1,12 @@
 import { COMPANIES_LIST_QUERY } from "@/graphql/queries";
-import { CreateButton, FilterDropdown, List , useTable } from "@refinedev/antd"
+import { CreateButton, DeleteButton, EditButton, FilterDropdown, List , useTable } from "@refinedev/antd"
 import { getDefaultFilter, useGo } from "@refinedev/core";
 import { Table,Input , Space} from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import CustomAvatar from "@/components/custom-avatar";
+import { Text } from "@/components/text";
+import { Company } from "@/graphql/schema.types";
+import { currencyNumber } from "@/utilities";
 
 export const CompanyList = () => {
     const go = useGo();
@@ -41,7 +45,7 @@ export const CompanyList = () => {
                     ...tableProps.pagination,
                 }}
             >
-                <Table.Column
+                <Table.Column<Company>
                     dataIndex= "name"
                     title="Company title"
                     defaultFilteredValue={getDefaultFilter('id',filters)}
@@ -53,8 +57,36 @@ export const CompanyList = () => {
                     )}
                     render ={(value ,record)=> (
                         <Space>
+                            <CustomAvatar shape="square" name={record.name} src={record.avatarUrl}/>
+                            <Text style={{
+                                whiteSpace: 'nowrap'
+                            }}>
+                                {record.name}
+                            </Text>
                         </Space>
                     )}
+                />
+                <Table.Column
+                    dataIndex="totalRevenue"
+                    title= "Open deals amount"
+                    render = {(value,company)=> (
+                        <Text>
+                            {currencyNumber(company?.dealsAggregate?.[0].sum.value || 0 )}
+                        </Text>
+                    )}
+                
+                />
+                <Table.Column
+                    dataIndex="ID"
+                    title= "Actions"
+                    fixed = "right"
+                    render = {(value)=> (
+                        <Space>
+                            <EditButton hideText size="small" recordItemId={value}/>
+                            <DeleteButton hideText size="small" recordItemId={value}/>
+                        </Space>
+                    )}
+                
                 />
             </Table>
         </List>
