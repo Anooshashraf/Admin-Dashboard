@@ -13,17 +13,21 @@ export const CompanyList = () => {
     const {tableProps, filters} = useTable({
         
         resource: 'companies',
-        onSearch : (values) => [{
-            field: "name",
-            operator: 'contains',
-            value: values.name
-        }],
+        onSearch: (values) => {
+            return [
+                {
+                    field: 'name',
+                    operator: 'contains',
+                    value: values.name
+                }
+            ]
+        },
         pagination:{
             pageSize: 12
         },
         sorters: {
             initial:[{
-                field:"CreatedAt",
+                field:"createdAt",
                 order:"desc"
             }]
 
