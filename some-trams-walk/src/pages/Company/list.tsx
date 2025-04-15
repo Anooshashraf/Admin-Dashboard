@@ -13,8 +13,27 @@ export const CompanyList = () => {
     const {tableProps, filters} = useTable({
         
         resource: 'companies',
+        onSearch : (values) => [{
+            field: "name",
+            operator: 'contains',
+            value: values.name
+        }],
         pagination:{
             pageSize: 12
+        },
+        sorters: {
+            initial:[{
+                field:"CreatedAt",
+                order:"desc"
+            }]
+
+        },
+        filters: {
+            initial: [{
+                field: "name",
+                operator: 'contains',
+                value: undefined
+            }]
         },
         meta: {
             gqlQuery: COMPANIES_LIST_QUERY 
