@@ -45,6 +45,14 @@ export const Create = () => {
                     >
                         <Input placeholder="Please enter a company name"/>
                     </Form.Item>
+                      <Form.Item
+                        label="Sales Owner"
+                        name= "SalesOnwerId"
+                        rules={[{required: true}]}
+                    >
+                        <Input placeholder="Please select a sales owner"/>
+                        {...selectProps}
+                    </Form.Item>
                 </Form>
             </Modal>
         </CompanyList>
