@@ -6,7 +6,9 @@ import { CREATE_COMPANY_MUTATION } from "@/graphql/mutations";
 import { Form } from "antd";
 import { useSelect } from "@refinedev/antd";
 import { USERS_SELECT_QUERY } from "@/graphql/queries";
-
+import SelectOptionWithAvatar from "@/components/select-option-with-avatar";
+import { GetFieldsFromList } from "@refinedev/nestjs-query";
+import { UsersSelectQuery } from "@/graphql/types";
 
 export const Create = () => {
     const go = useGo ()  //refine uses useGo() for navigation
@@ -30,7 +32,7 @@ export const Create = () => {
             gqlMutation: CREATE_COMPANY_MUTATION 
         }
     })
-    const {selectProps , queryResults} = useSelect({
+    const {selectProps , queryResult} = useSelect<GetFieldsFromList<UsersSelectQuery>>({
         resource: 'users',
         optionLabel: 'name',
         meta: {
@@ -63,19 +65,17 @@ export const Create = () => {
                             placeholder="Please select a sales owner"
                             {...selectProps}
                             options = {
-                                queryResults.data?.data.map((user) => ({
-                                    values: user.id,
-                                    label:{
+                                queryResult.data?.data.map((user) => ({
+                                    value: user.id,
+                                    label:(
                                         <SelectOptionWithAvatar
                                             name={user.name}
                                             avatarUrl = {user.avatarUrl ?? undefined}
                                         />
-                                    }
-                                }))
+                                    )
+                                })) ?? []
                             }
                         />
-                        
-
                     </Form.Item> 
                 </Form>
             </Modal>

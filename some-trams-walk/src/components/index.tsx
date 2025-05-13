@@ -8,7 +8,6 @@ import AccordionHeaderSkeleton from "./skeleton/accordion-header";
 import DashboardTotalCountCard from "./home/total-count-card";
 import LatestActivities from "./home/latest-activities";
 
-
 export { 
     UpcomingEvents,
     DealsChart,
