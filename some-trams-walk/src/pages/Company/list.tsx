@@ -8,6 +8,8 @@ import { Text } from "@/components/text";
 import { Company } from "@/graphql/schema.types";
 import { currencyNumber } from "@/utilities";
 
+//we last stopped at list.tsx
+
 export const CompanyList = ({children} : React.PropsWithChildren) => {
     const go = useGo();
     const {tableProps, filters} = useTable({
