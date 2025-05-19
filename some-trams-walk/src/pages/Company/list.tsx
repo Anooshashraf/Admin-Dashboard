@@ -20,7 +20,7 @@ export const CompanyList = ({children} : React.PropsWithChildren) => {
                 {
                     field: 'name',
                     operator: 'contains',
-                    value: values.name
+                    value: values.name // here the error is of values
                 }
             ]
         },
