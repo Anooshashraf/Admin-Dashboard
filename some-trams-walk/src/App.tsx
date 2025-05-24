@@ -24,7 +24,6 @@ import { App as AntdApp } from "antd";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router";
 import { resources } from "./config/resources";
 import Layout from "./components/layout";
-import Edit from "./pages/Company/edit";
 import EditPage from "./pages/Company/edit";
 
 function App() {

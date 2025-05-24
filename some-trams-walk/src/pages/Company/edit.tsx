@@ -24,7 +24,7 @@ const EditPage = () => {
               breadcrumb={false}
             >
               <Form {...formProps} layout='vertical'>
-                <CustomAvatar shape='circle' src={avatarUrl} name={getNameInitials(name)} style={{width:96, height:96}}
+                <CustomAvatar shape='circle' src={avatarUrl} name={getNameInitials(name || '')}
                 />
 
               </Form>
