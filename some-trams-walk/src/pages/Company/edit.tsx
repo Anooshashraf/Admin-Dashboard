@@ -1,7 +1,9 @@
 import React from 'react'
-import { Col , Row} from 'antd'
+import { Col , Form, Row} from 'antd'
 import { Edit , useForm } from '@refinedev/antd'
 import { UPDATE_COMPANY_MUTATION } from '@/graphql/mutations'
+import CustomAvatar from '@/components/custom-avatar'
+import { getNameInitials } from '@/utilities'
 
 
 const EditPage = () => {
@@ -10,7 +12,8 @@ const EditPage = () => {
     meta: {
       gqlMutation : UPDATE_COMPANY_MUTATION //gqlMutation for updating anything here we're updating the company
     }
-  })
+  });
+  const {avatarUrl , name} =queryResult?.data?.data  || {}
   return (
     <div>
         <Row gutter={[32,32]}>
@@ -19,7 +22,13 @@ const EditPage = () => {
               isLoading = {formLoading}
               saveButtonProps={saveButtonProps}
               breadcrumb={false}
-            />
+            >
+              <Form {...formProps} layout='vertical'>
+                <CustomAvatar shape='circle' src={avatarUrl} name={getNameInitials(name)} style={{width:96, height:96}}
+                />
+
+              </Form>
+            </Edit> 
           </Col>
         </Row>
     </div>
