@@ -5,8 +5,8 @@ import { UPDATE_COMPANY_MUTATION } from '@/graphql/mutations'
 
 
 const EditPage = () => {
-  const { } = useForm({
-    redirect: 'false',
+  const { saveButtonProps , formProps , formLoading , queryResult} = useForm({
+    redirect: false,
     meta: {
       gqlMutation : UPDATE_COMPANY_MUTATION //gqlMutation for updating anything here we're updating the company
     }
@@ -15,7 +15,11 @@ const EditPage = () => {
     <div>
         <Row gutter={[32,32]}>
           <Col xs={24} xl={32}>
-            <Edit/>
+            <Edit
+              isLoading = {formLoading}
+              saveButtonProps={saveButtonProps}
+              breadcrumb={false}
+            />
           </Col>
         </Row>
     </div>
