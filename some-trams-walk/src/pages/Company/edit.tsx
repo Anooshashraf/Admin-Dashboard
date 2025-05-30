@@ -74,19 +74,19 @@ const EditPage = () => {
                     placeholder='0,00'
                   />
                 </Form.Item>
-                <Form.Item label="">
+                <Form.Item label="industry">
                   <Select options={industryOptions}
                   />
                 </Form.Item>
-                <Form.Item label="">
+                <Form.Item label="Business type">
                   <Select options={}
                   />
                 </Form.Item >
-                <Form.Item label="">
+                <Form.Item label="Country">
                   <Select options={}
                   />
                 </Form.Item > 
-                <Form.Item label="">
+                <Form.Item label="website">
                   <Select options={}
                   />
                 </Form.Item> 
