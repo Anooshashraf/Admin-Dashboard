@@ -21,6 +21,9 @@ const EditPage = () => {
   const {selectProps , queryResult : queryResultUsers} = useSelect<GetFieldsFromList<UsersSelectQuery>>({
     resource: 'users',
     optionLabel: 'name',
+    pagination: {
+      mode: 'off'
+    },
     meta: {
         gqlQuery: USERS_SELECT_QUERY
     }
