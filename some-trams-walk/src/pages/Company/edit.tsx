@@ -8,7 +8,7 @@ import { useSelect } from '@refinedev/antd'
 import { GetFieldsFromList } from "@refinedev/nestjs-query";
 import { UsersSelectQuery } from "@/graphql/types";
 import SelectOptionWithAvatar from "@/components/select-option-with-avatar";
-import { companySizeOptions } from '@/constants';
+import { companySizeOptions, industryOptions } from '@/constants';
 
 
 const EditPage = () => {
@@ -70,9 +70,26 @@ const EditPage = () => {
                   <InputNumber
                     autoFocus
                     addonBefore = '$'
+                    min={0}
                     placeholder='0,00'
                   />
                 </Form.Item>
+                <Form.Item label="">
+                  <Select options={industryOptions}
+                  />
+                </Form.Item>
+                <Form.Item label="">
+                  <Select options={}
+                  />
+                </Form.Item >
+                <Form.Item label="">
+                  <Select options={}
+                  />
+                </Form.Item > 
+                <Form.Item label="">
+                  <Select options={}
+                  />
+                </Form.Item> 
 
               </Form>
             </Edit>  
