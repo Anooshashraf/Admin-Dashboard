@@ -17,7 +17,7 @@ import { COMPANY_CONTACTS_TABLE_QUERY } from "@/graphql/queries";
 import { CompanyContactsTableQuery } from "@/graphql/types";
 import { Text } from "@/components/text";
 import CustomAvatar from "@/components/custom-avatar";
-import { ContactStatusTag } from "@/components/tags/contact-status-tag";
+
 
 type Contact = GetFieldsFromList<CompanyContactsTableQuery>;
 

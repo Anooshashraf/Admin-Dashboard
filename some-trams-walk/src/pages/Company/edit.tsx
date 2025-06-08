@@ -9,6 +9,7 @@ import { GetFieldsFromList } from "@refinedev/nestjs-query";
 import { UsersSelectQuery } from "@/graphql/types";
 import SelectOptionWithAvatar from "@/components/select-option-with-avatar";
 import { businessTypeOptions, companySizeOptions, industryOptions } from '@/constants';
+import { CompanyContactsTable } from './contacts-table';
 
 
 const EditPage = () => {
@@ -93,6 +94,9 @@ const EditPage = () => {
 
               </Form>
             </Edit>  
+          </Col>
+          <Col xs={24} xl={12}>
+                      <CompanyContactsTable/>
           </Col>
         </Row>
     </div>
