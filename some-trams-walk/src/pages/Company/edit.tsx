@@ -1,4 +1,4 @@
-import { Col , Form, InputNumber, Row , Select} from 'antd'
+import { Col , Form, Input, InputNumber, Row , Select} from 'antd'
 import { Edit , useForm } from '@refinedev/antd'
 import { UPDATE_COMPANY_MUTATION } from '@/graphql/mutations'
 import CustomAvatar from '@/components/custom-avatar'
@@ -8,7 +8,7 @@ import { useSelect } from '@refinedev/antd'
 import { GetFieldsFromList } from "@refinedev/nestjs-query";
 import { UsersSelectQuery } from "@/graphql/types";
 import SelectOptionWithAvatar from "@/components/select-option-with-avatar";
-import { companySizeOptions, industryOptions } from '@/constants';
+import { businessTypeOptions, companySizeOptions, industryOptions } from '@/constants';
 
 
 const EditPage = () => {
@@ -79,15 +79,15 @@ const EditPage = () => {
                   />
                 </Form.Item>
                 <Form.Item label="Business type">
-                  <Select options={}
+                  <Select options={businessTypeOptions}
                   />
                 </Form.Item >
-                <Form.Item label="Country">
-                  <Select options={}
+                <Form.Item label="Country" name="country">
+                  <Input placeholder= "Country"
                   />
                 </Form.Item > 
-                <Form.Item label="website">
-                  <Select options={}
+                <Form.Item label="Website" name="website">
+                  <Input placeholder="Website" 
                   />
                 </Form.Item> 
 
