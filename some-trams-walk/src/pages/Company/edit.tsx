@@ -95,7 +95,7 @@ const EditPage = () => {
               </Form>
             </Edit>  
           </Col>
-          <Col xs={24} xl={12}>
+          <Col>
                       <CompanyContactsTable/>
           </Col>
         </Row>
