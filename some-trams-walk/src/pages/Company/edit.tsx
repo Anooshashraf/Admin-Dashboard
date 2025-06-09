@@ -88,7 +88,7 @@ const EditPage = () => {
                   />
                 </Form.Item > 
                 <Form.Item label="Website" name="website">
-                  <Input placeholder="Website" 
+                  <Input placeholder="Website..." 
                   />
                 </Form.Item> 
 
